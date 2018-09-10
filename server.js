@@ -1,7 +1,13 @@
 var express = require('express');
 var app = express();
+const router = express.Router();
 var mongoose = require('mongoose');
-const config = require('./configuration/database');
+const config = require('./configuration/database'); // Mongoose Configuration
+const path = require('path');
+const customer = require('./routes/customer')(router); //import customer routes
+const order = require('./routes/order')(router); //import user routes
+const bodyParser = require('body-parser');
+const cors = require('cors');
 var port = process.env.PORT || 8080;
 
 const options = {
@@ -20,6 +26,11 @@ mongoose.connect(config.uri, options, (err) => {
   }
 });
 
+app.use('./customer', customer);
+app.use('./order', order);
+
 app.listen(port, () => {
   console.log('Listening on port ' + port);
 });
+
+
