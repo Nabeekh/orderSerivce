@@ -3,9 +3,8 @@ const config = require('../configuration/database'); // Import database configur
 
 module.exports = (router) => {
   console.log('This is running');
-
-  router.get('/create', (req, res) => {
-    res.send({ message: 'Category Saved!' });
+  router.post('/create', (req, res) => {
+    console.log("Running");
     res.json({ succcess: true, message: "Running" });
   });
 
